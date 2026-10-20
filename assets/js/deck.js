@@ -231,11 +231,12 @@ function runCounts(s) {
       if (p < 1) el._raf = requestAnimationFrame(step); else el.textContent = nf(to, dec);
     };
     el._raf = requestAnimationFrame(step);
+    clearTimeout(el._fin); el._fin = setTimeout(() => { cancelAnimationFrame(el._raf); el.textContent = nf(to, dec); }, delay + dur + 150);
   });
   $$('[data-ring]', s).forEach(el => { el.style.strokeDashoffset = 100 - parseFloat(el.dataset.ring); });
 }
 function resetCounts(s) {
-  $$('[data-count]', s).forEach(el => { cancelAnimationFrame(el._raf); el.textContent = nf(0, +(el.dataset.dec || 0)); });
+  $$('[data-count]', s).forEach(el => { cancelAnimationFrame(el._raf); clearTimeout(el._fin); el.textContent = nf(0, +(el.dataset.dec || 0)); });
   $$('[data-ring]', s).forEach(el => { el.style.strokeDashoffset = ''; });
 }
 $$('[data-count]').forEach(el => { el.textContent = nf(0, +(el.dataset.dec || 0)); });
