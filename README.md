@@ -5,16 +5,33 @@ Apresentação HTML da proposta da 75LAB para estruturar o **Food Service da Lac
 - **Apresentação:** https://projetos.75lab.com.br/lactalis-food-service-parceria/
 - Apresentadora: Vanessa Morelli, Diretora Comercial 75LAB
 
-## Roteiro: capa + 5 telas
+## Roteiro: capa + 6 telas
 
 | Tela | Takeaway |
 |---|---|
 | 00 · Capa | Trailer de abertura (hotéis, hospitais, restaurantes, padarias, confeitarias, distribuidores, feiras) e a ideia central: *cada ambiente pede uma resposta própria*. |
-| 01 · O desafio atual | O Food Service está em construção; o desafio é conectar direção, ferramentas e presença. Sinais do briefing → três frentes → pergunta que orienta a parceria, mais a escala do mercado (ABIA/Wise Sales). |
-| 02 · Como a 75LAB pode apoiar | Da estratégia à execução, ao lado do time Lactalis: ciclo Estruturar → Equipar → Ativar → Evoluir, com o resultado esperado de cada frente e os papéis de cada parte. |
-| 03 · Oportunidades por canal | Cada ambiente pede uma proposta própria; cases reais do portfólio 75LAB por canal (acordeão interativo), e feiras e eventos como pontos de contato. |
-| 04 · Projetos possíveis | Projetos modulares, cada um deixando ativos para o próximo; o piloto Bidfood SP como exemplo prático, com janela de até 90 dias. |
-| 05 · Contratação e próximos passos | Começar por uma prioridade e construir continuidade: o que cada proposta define, os 4 próximos passos, o critério de sucesso, o encerramento e os contatos. |
+| 01 · O desafio atual | O Food Service está em construção; o desafio é conectar direção, ferramentas e presença. O que ouvimos → três frentes → pergunta que orienta a parceria, mais a escala do mercado (ABIA/Wise Sales). |
+| 02 · Como a 75LAB pode apoiar | Da estratégia à execução, ao lado da Lactalis: Estruturar → Equipar → Ativar → Evoluir, com o resultado de cada frente e o papel de cada parte. |
+| 03 · Oportunidades por canal | Cada ambiente pede uma proposta própria: 5 canais com exemplo de aplicação e case real do portfólio 75LAB, e feiras e eventos como pontos de contato. |
+| 04 · Projetos possíveis | Cada projeto deixa ativos para o próximo: três módulos e o piloto Bidfood SP como exemplo prático (até 90 dias). |
+| 05 · Contratação e próximos passos | Começar por uma prioridade e construir continuidade: o que cada proposta define, os 4 próximos passos, o critério de sucesso e o encerramento. |
+| 06 · Investimento | Piloto de 90 dias com escopo fechado em seis frentes, R$ 75.000 no total, e os contatos da Vanessa. |
+
+Tipografia das telas principais: títulos de 54 px, texto de 17 a 19 px e rótulos de no mínimo 13 px (medidas do palco de 1600 × 900).
+
+### Investimento do piloto (tela 06)
+
+| Frente | O que inclui | Valor |
+|---|---|---|
+| Estratégia e prontidão | Workshop, diagnóstico comercial, baseline e plano do piloto | R$ 15.000 |
+| Conteúdo e criação | Apresentação, lâmina, folder, guia de rota, fichas técnicas e conteúdo por ocasião | R$ 27.000 |
+| Produção leve | Tiragem inicial de lâminas, folders e cartões de rota | R$ 8.000 |
+| Treinamento | Kit de treinamento de vendas para o time do distribuidor | R$ 6.000 |
+| Ativações | Coordenação de demonstrações em contas selecionadas | R$ 8.000 |
+| Rastreamento e decisão | QR rastreável, painel de acompanhamento e relatório de decisão | R$ 11.000 |
+| **Total · piloto de 90 dias** | | **R$ 75.000** |
+
+As descrições de cada frente e a nota "fora do escopo" (promotoria e equipe de campo, mídia paga e produto para degustação) vêm da versão anterior da proposta.
 
 **Material de apoio (oculto, A1–A14):** mercado, concorrência (matriz de recursos), jornada do canal (shopper B2B), tendências, kit comercial em vista explodida 3D, feiras e eventos 2026/27, piloto Bidfood, cronograma, Plano de Rastreamento 75LAB (One Shot × On Timing), fluxo do sinal à decisão, indicadores, benefícios conectados, 75LAB e cases, contatos institucionais. O material de apoio só abre pelos botões "↗" das telas ou pelo menu `M`. Para voltar à tela de origem, use `Esc` ou o botão "Voltar à apresentação".
 
@@ -64,6 +81,7 @@ Identidade: azul Lactalis `#004B85`, swoosh `#5BC5F2` e fundo `#F0F4F8`, os mesm
 
 ## Pendências
 
+- Investimento (tela 06): confirmar condições de pagamento, validade da proposta e a nota "fora do escopo" antes de enviar.
 - Autorização para mostrar à Lactalis os cases de 3 Corações, Seara, Alltak e Abras.
 - Hospitais e alimentação institucional: não há case publicado de comunicação técnica, e o card mostra "formato a desenvolver".
 - Endereço da 75LAB: `[a preencher]` em A14.
