@@ -302,10 +302,26 @@ function chrome(s) {
   try { history.replaceState(null, '', '#' + s.id); } catch (e) {}
 }
 
+// chama fn uma única vez: no fim da animação ou, se o navegador pausar animações, pelo relógio
+function after(anim, ms, fn) {
+  let ok = false; const run = () => { if (ok) return; ok = true; fn(); };
+  if (anim) anim.onfinish = run;
+  setTimeout(run, ms);
+}
+// estado final garantido: só a tela atual ativa, cortina fora da tela
+function settle() {
+  slides.forEach(s => { if (s !== cur && s.classList.contains('is-active')) deactivate(s); });
+  if (cur && !cur.classList.contains('is-active')) activate(cur);
+  if (cur) setTheme(cur.dataset.theme);
+  curtain.getAnimations?.().forEach(a => a.cancel());
+  busy = false;
+}
 function show(next, dir) {
   if (!next || next === cur) return;
   if (busy && performance.now() - busyT < 1400) return;
+  if (busy) settle();
   const prev = cur; cur = next;
+  slides.forEach(s => { if (s !== prev && s !== next && s.classList.contains('is-active')) deactivate(s); });
   chrome(next); setOrbit(next);
   if (!prev || RM) {
     if (prev) deactivate(prev);
@@ -313,14 +329,14 @@ function show(next, dir) {
     return;
   }
   busy = true; busyT = performance.now();
-  const done = () => { busy = false; };
   const ez = 'cubic-bezier(.7,0,.2,1)';
   if (dir === 0) {
     const a = prev.animate([{ opacity: 1, transform: 'scale(1)', filter: 'blur(0px)' }, { opacity: 0, transform: 'scale(.93)', filter: 'blur(10px)' }], { duration: 480, easing: 'cubic-bezier(.6,0,.9,.4)', fill: 'forwards' });
-    a.onfinish = () => deactivate(prev);
+    after(a, 700, () => { if (prev !== cur) deactivate(prev); });
     setTimeout(() => {
+      if (cur !== next) return;
       setTheme(next.dataset.theme); activate(next);
-      next.animate([{ opacity: 0, transform: 'scale(1.07)', filter: 'blur(12px)' }, { opacity: 1, transform: 'scale(1)', filter: 'blur(0px)' }], { duration: 820, easing: 'cubic-bezier(.16,.84,.24,1)' }).onfinish = done;
+      after(next.animate([{ opacity: 0, transform: 'scale(1.07)', filter: 'blur(12px)' }, { opacity: 1, transform: 'scale(1)', filter: 'blur(0px)' }], { duration: 820, easing: 'cubic-bezier(.16,.84,.24,1)' }), 1100, settle);
     }, 300);
     return;
   }
@@ -329,20 +345,22 @@ function show(next, dir) {
     const from = dir > 0 ? 102 : -102;
     const c1 = curtain.animate([{ transform: `translateX(${from}%)` }, { transform: 'translateX(0%)' }], { duration: 560, easing: ez, fill: 'forwards' });
     prev.animate([{ transform: 'translateX(0)', filter: 'blur(0px)' }, { transform: `translateX(${-dir * 90}px)`, filter: 'blur(4px)' }], { duration: 560, easing: ez, fill: 'forwards' });
-    c1.onfinish = () => {
+    after(c1, 800, () => {
+      if (cur !== next) return;
       deactivate(prev); setTheme(next.dataset.theme); activate(next);
       next.animate([{ transform: `translateX(${dir * 120}px)` }, { transform: 'translateX(0)' }], { duration: 900, easing: 'cubic-bezier(.16,.84,.24,1)' });
       const c2 = curtain.animate([{ transform: 'translateX(0%)' }, { transform: `translateX(${-from}%)` }], { duration: 640, easing: ez, fill: 'forwards' });
-      c2.onfinish = () => { c1.cancel(); c2.cancel(); done(); };
-    };
+      after(c2, 900, settle);
+    });
     return;
   }
   const a = prev.animate([{ opacity: 1, transform: 'translateX(0)', filter: 'blur(0px)' }, { opacity: 0, transform: `translateX(${-dir * 70}px)`, filter: 'blur(6px)' }], { duration: 520, easing: 'cubic-bezier(.7,0,.84,0)', fill: 'forwards' });
-  a.onfinish = () => deactivate(prev);
+  after(a, 760, () => { if (prev !== cur) deactivate(prev); });
   setTimeout(() => {
+    if (cur !== next) return;
     activate(next);
     const clipFrom = dir > 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)';
-    next.animate([{ clipPath: clipFrom, transform: `translateX(${dir * 90}px)` }, { clipPath: 'inset(0 0 0 0%)', transform: 'translateX(0)' }], { duration: 980, easing: ez }).onfinish = done;
+    after(next.animate([{ clipPath: clipFrom, transform: `translateX(${dir * 90}px)` }, { clipPath: 'inset(0 0 0 0%)', transform: 'translateX(0)' }], { duration: 980, easing: ez }), 1250, settle);
     sweep.animate([{ left: dir > 0 ? '100%' : '0%', opacity: 1 }, { left: dir > 0 ? '0%' : '100%', opacity: 1, offset: .92 }, { left: dir > 0 ? '0%' : '100%', opacity: 0 }], { duration: 980, easing: ez });
   }, 220);
 }
