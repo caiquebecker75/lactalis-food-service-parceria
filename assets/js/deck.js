@@ -203,7 +203,8 @@ const qa = parseFloat((location.search.match(/[?&]ar=([\d.]+)/) || [])[1]) || 0;
 const orbitSvg = $('.orbit');
 function fit() {
   if (mobile) return;
-  const vw = innerWidth, vh = innerHeight, a = qa || vw / vh;
+  const vw = innerWidth, vh = innerHeight; if (!vw || !vh) return;
+  const a = qa || vw / vh;
   let W = 1600, H = 900;
   if (a > 16 / 9) W = Math.min(2100, Math.round(900 * a));
   else H = Math.min(1100, Math.round(1600 / a));
@@ -283,7 +284,8 @@ function setTheme(t) { body.dataset.theme = t; }
 function activate(s) {
   s.classList.add('is-active');
   void s.offsetWidth;
-  requestAnimationFrame(() => { s.classList.add('is-in'); runCounts(s); });
+  const enter = () => { if (s.classList.contains('is-in') || !s.classList.contains('is-active') || (s.id === 's0' && introOn)) return; s.classList.add('is-in'); runCounts(s); };
+  requestAnimationFrame(enter); setTimeout(enter, 120);
   if (s.id === 's0') coverIn();
 }
 function deactivate(s) {
