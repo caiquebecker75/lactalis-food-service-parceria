@@ -478,7 +478,6 @@ document.addEventListener('keydown', e => {
     case 'm': case 'M': e.preventDefault(); openMenu(); break;
     case 'n': case 'N': toggleNotes(); break;
     case 'f': case 'F': if (!document.fullscreenElement) html.requestFullscreen?.().catch(() => {}); else document.exitFullscreen?.(); break;
-    case 'c': case 'C': toggleCursor(); break;
   }
 });
 if (!mobile) {
@@ -629,36 +628,29 @@ document.addEventListener('click', e => {
 });
 
 /* ---------------------------------------------------------------------
-   Cursor próprio (desligado em toque; tecla C alterna)
+   Clique nas laterais: esquerda volta, direita avança
+   (cliques em botões, links, imagens, cards e no kit 3D seguem normais)
    --------------------------------------------------------------------- */
-const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-const ring = $('#curRing'), dot = $('#curDot'), ringT = $('span', ring);
-let cursorOn = fine && !mobile && store.get('lfs-cursor') !== 'off';
-function toggleCursor() {
-  if (!fine || mobile) return;
-  cursorOn = !cursorOn; store.set('lfs-cursor', cursorOn ? 'on' : 'off');
-  html.classList.toggle('has-cursor', cursorOn);
-  toast.textContent = cursorOn ? 'Cursor da apresentação ligado' : 'Cursor do sistema ligado';
-  toast.classList.add('on'); setTimeout(() => toast.classList.remove('on'), 1500);
-}
-if (fine && !mobile) {
-  html.classList.toggle('has-cursor', cursorOn);
+if (!mobile) {
+  const EDGE = .1, SKIP = 'a,button,input,label,select,textarea,[role=tab],[data-zoom],.acp,.kit3d,.chrome,.menu,.lb,.np';
+  const side = x => x < Math.max(70, innerWidth * EDGE) ? -1 : x > innerWidth - Math.max(70, innerWidth * EDGE) ? 1 : 0;
+  document.addEventListener('click', e => {
+    if (e.button !== 0 || introOn || lb.classList.contains('open') || menu.classList.contains('open')) return;
+    if (e.target.closest(SKIP) || getSelection().toString()) return;
+    const d = side(e.clientX); if (d) step(d);
+  });
+  // dica discreta: uma seta aparece na lateral quando o mouse passa por ela
+  const hint = document.createElement('div'); hint.className = 'edge-hint'; hint.setAttribute('aria-hidden', 'true');
+  hint.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 3 5 5-5 5"/></svg>';
+  body.appendChild(hint);
   addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') return;
-    const t = `translate(${e.clientX}px,${e.clientY}px)`;
-    dot.style.transform = t; ring.style.transform = t;
-    html.classList.remove('cur-hide');
+    const d = (!e.target.closest || e.target.closest(SKIP)) ? 0 : side(e.clientX);
+    const list = cur && (cur.classList.contains('apx') ? apxS : mainS), i = list ? list.indexOf(cur) + d : -1;
+    const ok = d && i >= 0 && i < list.length && !introOn;
+    hint.classList.toggle('on', !!ok); hint.classList.toggle('l', d < 0);
   }, { passive: true });
-  document.addEventListener('mouseleave', () => html.classList.add('cur-hide'));
-  document.addEventListener('mouseover', e => {
-    const z = e.target.closest('.zoomable,[data-zoom]');
-    const k = e.target.closest('.kit3d');
-    const i = e.target.closest('button,a,[role=tab],input,label');
-    ring.classList.remove('hov', 'lbl');
-    if (z && !(z.closest('.acp:not(.open)'))) { ring.classList.add('lbl'); ringT.textContent = 'Ampliar'; }
-    else if (k) { ring.classList.add('lbl'); ringT.textContent = 'Girar'; }
-    else if (i) ring.classList.add('hov');
-  });
+  document.addEventListener('mouseleave', () => hint.classList.remove('on'));
 }
 
 /* ---------------------------------------------------------------------

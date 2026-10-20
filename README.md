@@ -20,7 +20,7 @@ Apresentação HTML da proposta da 75LAB para estruturar o **Food Service da Lac
 
 ## Navegação
 
-`→` `↓` `PageDown` `espaço` avançam e `←` `↑` `PageUp` voltam. Também funcionam a roda do mouse, o deslizar no tablet e as setas e a barra de progresso no canto inferior direito. `Home`/`End`, `M` capítulos, `N` notas da apresentadora, `F` tela cheia, `C` alterna o cursor da apresentação com o do sistema, `Esc` volta. Deep link: `#s3`, `#a9`.
+`→` `↓` `PageDown` `espaço` avançam e `←` `↑` `PageUp` voltam. Clicar na lateral direita da tela (10% da largura) avança e na lateral esquerda volta; uma seta discreta aparece ao passar o mouse ali. Cliques em botões, imagens, cards e no kit 3D funcionam normalmente. Também funcionam a roda do mouse, o deslizar no tablet e as setas e a barra de progresso no canto inferior direito. `Home`/`End`, `M` capítulos, `N` notas da apresentadora, `F` tela cheia, `Esc` volta. Cursor do sistema. Deep link: `#s3`, `#a9`.
 
 O trailer de abertura roda uma vez por sessão do navegador; qualquer tecla ou clique pula. Até 820 px de largura (e em tablet em retrato) a apresentação vira rolagem vertical, com o material de apoio no botão do fim da página. Para testar o modo apresentação numa janela estreita, use `?desktop`. Com `prefers-reduced-motion`, as animações viram transições curtas.
 
@@ -33,7 +33,7 @@ index.html              todas as telas (roteiro + material de apoio) e notas da 
 assets/css/deck.css     sistema visual, telas, celular e movimento reduzido
 assets/js/deck.js       ícones SVG animados, navegação e transições, trailer, contadores,
                         lightbox, acordeão de canais, kit 3D, matriz de concorrência,
-                        cursor, partículas de fundo, modo celular
+                        clique nas laterais, partículas de fundo, modo celular
 assets/img/brand/       logos Lactalis Brasil e 75LAB
 assets/img/cases/       pranchas do portfólio 75LAB (75lab.com.br/cases)
 assets/img/scenes/      fotos de ambiente (Unsplash License)
