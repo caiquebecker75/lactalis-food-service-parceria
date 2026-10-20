@@ -89,7 +89,7 @@ body[data-theme="light"] .orbit .spark{fill:var(--navy2);filter:none}
 .brandbar{position:absolute;left:56px;top:28px;display:flex;align-items:center;gap:16px;height:46px;padding:0 20px 0 18px;border-radius:99px;background:rgba(255,255,255,.96);box-shadow:0 10px 30px -18px rgba(0,30,60,.55),0 0 0 1px rgba(0,75,133,.06)}
 .brandbar .lac{height:30px;width:auto}
 .brandbar .div{width:1px;height:22px;background:rgba(0,75,133,.2)}
-.brandbar .lab{height:20px;width:auto}
+.brandbar .b75{height:20px;width:auto}
 .brandbar .x{font-family:var(--f-mono);font-size:12px;color:#5B7088;letter-spacing:.08em}
 .topr{position:absolute;right:56px;top:28px;display:flex;align-items:center;gap:14px;height:46px}
 .chap{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);transition:color .6s}
@@ -869,7 +869,7 @@ html.m .orbit{position:fixed;inset:0;height:100vh;opacity:.5}
 html.m .chrome{position:fixed;inset:0 0 auto 0;height:62px;z-index:50;background:linear-gradient(180deg,rgba(3,21,43,.92),rgba(3,21,43,.6));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 html.m .brandbar{left:14px;top:10px;height:40px;padding:0 14px;gap:10px}
 html.m .brandbar .lac{height:24px}
-html.m .brandbar .lab{height:16px}
+html.m .brandbar .b75{height:17px}
 html.m .topr{right:14px;top:11px;height:40px}
 html.m .chap,html.m .foot,html.m .prog,html.m .curtain,html.m .sweep{display:none}
 html.m .menu-btn{color:#fff;border-color:rgba(255,255,255,.25);padding:0 12px}
@@ -1005,7 +1005,7 @@ html.m .cmx-foot{grid-template-columns:1fr}
 .stage.on-cover .orbit .cres{opacity:.75}
 .brandbar{height:52px;padding:0 22px 0 20px}
 .brandbar .lac{height:34px}
-.brandbar .lab{height:22px}
+.brandbar .b75{height:24px}
 .st{width:384px;padding:16px 20px 16px}
 .st .hd{gap:12px;justify-content:flex-start}
 .st .hd b{margin:0;font-size:25px}
@@ -1081,3 +1081,78 @@ html.m #s0 .kick{font-size:11px;letter-spacing:.16em}
 html.m .basebar{flex-wrap:wrap;gap:8px 12px}html.m .basebar .ln{display:none}html.m .dz,html.m .mods,html.m .ct,html.m .close{grid-template-columns:minmax(0,1fr)}
 html.m #s0 .sl{top:auto;bottom:auto}
 html.m .bp{width:250px;height:250px}html.m .bp .ctr{width:130px}html.m .bp .ctr b{font-size:17px}html.m .bp .ctr .mono{display:none}
+/* palco adaptável: colunas proporcionais na tela 01 */
+.dz{grid-template-columns:minmax(330px,.85fr) minmax(80px,.34fr) minmax(420px,1.1fr) 64px minmax(380px,1fr)}
+html.m .dz{grid-template-columns:minmax(0,1fr)}
+
+/* =========================================================================
+   LIMPEZA VISUAL (v2): menos camadas, menos caixas, menos rótulos
+   ========================================================================= */
+/* moldura e fundo */
+.grain,.chap,.foot{display:none}
+.orbit .ring2,.orbit .spark{display:none}
+.orbit .cres{opacity:.45}
+.stage.on-cover .orbit .cres{opacity:.7}
+.bg-glow::before{opacity:.7}
+.bg-glow::after{opacity:.5}
+body[data-theme="light"] .bg-glow{opacity:.55}
+.src{opacity:.7;font-size:11px}
+
+/* pílulas viram texto corrido com separador */
+.chip{background:none!important;padding:0;border-radius:0;font-size:14px;font-weight:500;color:#2C4560;white-space:normal}
+.slide:not([data-theme="light"]) .chip{color:#C3D7EA}
+.chips{gap:4px 0}
+.chips .chip:not(:last-child)::after{content:"·";margin:0 9px 0 9px;color:var(--sky);font-weight:700}
+
+/* links de aprofundamento discretos */
+.go,.go.ghost{height:auto;padding:4px 0;background:none;border:0;border-bottom:1px solid currentColor;border-radius:0;color:var(--acc);box-shadow:none!important;font-size:11.5px}
+.go:hover{transform:none}
+.go.lime{color:var(--lime)}
+
+/* 01 · sinais como lista simples, fios mais leves */
+.sig{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:11px 0;font-weight:600}
+.sig .pd::after{display:none}
+.sig .pd{width:7px;height:7px}
+.dz-sig{gap:0}
+.dz-wire path{opacity:.3}
+.dz-wire .flow-dash{display:none}
+.fr{box-shadow:0 18px 40px -36px rgba(0,40,80,.5)}
+.dz-q::before{opacity:.5}
+
+/* 02 · sem credenciais repetidas; papéis sem caixas */
+.creds{display:none}
+.roles{gap:24px}
+.roles div{border:0;border-top:1px solid rgba(255,255,255,.14);border-radius:0;padding:12px 0 0;background:none!important}
+.roles .us{border-top-color:var(--lime)}
+.st{background:rgba(5,32,60,.82)}
+
+/* 03 · imagens sem etiquetas, faixa de feiras sem tracejado */
+.acp .med .tag{display:none}
+.acp{box-shadow:0 20px 40px -38px rgba(0,40,80,.6)}
+.tps{border:0;background:rgba(0,75,133,.045)}
+.tps .flow .ph{background:none;border:0;padding:4px 0}
+.acp .more .mono,.acp .case .k{display:none}
+
+/* 04 · sem faixa "base comum" */
+.basebar{display:none}
+.mod{box-shadow:0 20px 40px -38px rgba(0,40,80,.6)}
+.mod .chips .chip{font-size:14px}
+.mods{margin-top:28px}
+.pilot{margin-top:18px}
+
+/* 05 · rótulos do anel sem ícone e sem caixa */
+.bp .bpl{background:none;border:0;padding:0;font-weight:600;color:#C3D7EA}
+.bp .bpl .ic{display:none}
+.step .tx{background:none;border:0;border-bottom:1px solid rgba(255,255,255,.12);border-radius:0;padding:10px 0 12px}
+
+/* A7 · cabe em qualquer proporção */
+.pl-side{gap:10px}
+.pl-side .box{padding:12px 16px}
+.pl-funnel div{height:21px}
+.acp:not(.open) .med .crop img{transform:scale(calc(var(--sc,1.6) * 1.22))}
+.chips{display:block;line-height:1.75}.chip{display:inline;white-space:normal}.chips .chip:not(:last-child)::after{margin:0 8px}
+.mod .chips{display:grid;gap:6px;line-height:1.3}
+.mod .chips .chip{display:block;position:relative;padding-left:16px;font-size:14.5px;color:#2C4560}
+.mod .chips .chip::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--sky)}
+.mod .chips .chip::after{content:none!important}
+.kit-ui{gap:12px}.kit-ui .why{min-height:96px;padding:14px 16px}.drag-hint{bottom:10px}.kit{margin-top:4px}

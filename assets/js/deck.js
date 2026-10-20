@@ -197,10 +197,19 @@ paintIcons();
 /* ---------------------------------------------------------------------
    Escala do palco
    --------------------------------------------------------------------- */
+// o palco acompanha a proporção da janela: 900 de altura e largura de 1600 a 2100
+// (ou 1600 de largura e altura até 1100 em telas mais altas), sem faixas vazias
+const qa = parseFloat((location.search.match(/[?&]ar=([\d.]+)/) || [])[1]) || 0; // QA: ?desktop&ar=2.2
+const orbitSvg = $('.orbit');
 function fit() {
   if (mobile) return;
-  const s = Math.min(innerWidth / 1600, innerHeight / 900);
-  stage.style.setProperty('--scale', s.toFixed(4));
+  const vw = innerWidth, vh = innerHeight, a = qa || vw / vh;
+  let W = 1600, H = 900;
+  if (a > 16 / 9) W = Math.min(2100, Math.round(900 * a));
+  else H = Math.min(1100, Math.round(1600 / a));
+  stage.style.width = W + 'px'; stage.style.height = H + 'px';
+  stage.style.setProperty('--scale', Math.min(vw / W, vh / H).toFixed(4));
+  orbitSvg.setAttribute('viewBox', `${(1600 - W) / 2} ${(900 - H) / 2} ${W} ${H}`);
 }
 fit();
 addEventListener('resize', fit);
@@ -238,7 +247,7 @@ const orbitG = $('#orbitG');
 function setOrbit(s) {
   const v = (s.dataset.orbit || '0,0,0,1,.5').split(',').map(Number);
   orbitG.style.transform = `translate(${v[0]}px,${v[1]}px) rotate(${v[2]}deg) scale(${v[3]})`;
-  orbitG.style.opacity = v[4];
+  orbitG.style.opacity = (s.id === 's0' || s.id === 's2') ? v[4] : v[4] * .5;
 }
 const otp = $('#otextPath');
 let oOff = 0, oLast = 0, oSeg = 0;
@@ -658,7 +667,7 @@ if (fine && !mobile) {
 (function particles() {
   const cv = $('#particles'), cx = cv.getContext('2d'); if (!cx) return;
   const low = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
-  const N = mobile ? 26 : low ? 34 : 70;
+  const N = mobile ? 14 : low ? 18 : 30;
   let W = 0, H = 0, dpr = 1, P = [], mx = 0, my = 0, smx = 0, smy = 0, last = 0;
   const resize = () => {
     dpr = Math.min(2, devicePixelRatio || 1);
@@ -678,7 +687,7 @@ if (fine && !mobile) {
       const tw = .65 + .35 * Math.sin(t * .0012 + p.ph);
       const px = (p.x - smx * p.r * .012) * W, py = (p.y - smy * p.r * .012) * H;
       cx.beginPath(); cx.arc(px, py, p.r * dpr, 0, 6.283);
-      cx.fillStyle = light ? `rgba(0,75,133,${p.a * .45 * tw})` : `rgba(182,230,251,${p.a * tw})`;
+      cx.fillStyle = light ? `rgba(0,75,133,${p.a * .22 * tw})` : `rgba(182,230,251,${p.a * .6 * tw})`;
       cx.fill();
     });
     if (!RM && !document.hidden) requestAnimationFrame(draw);

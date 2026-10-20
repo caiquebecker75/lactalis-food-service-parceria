@@ -26,7 +26,7 @@ O trailer de abertura roda uma vez por sessão do navegador; qualquer tecla ou c
 
 ## Arquitetura
 
-HTML, CSS e JavaScript puros, sem build e sem dependências (as fontes vêm do Google Fonts). Palco 16:9 de 1600 × 900 que escala para caber na janela; a órbita (o swoosh do logo Lactalis) atravessa todas as telas e muda de posição a cada uma.
+HTML, CSS e JavaScript puros, sem build e sem dependências (as fontes vêm do Google Fonts). O palco acompanha a proporção da janela: 900 de altura e largura de 1600 a 2100 em telas largas, ou 1600 de largura e altura até 1100 em telas mais altas, sem faixas vazias nas laterais. A órbita (o swoosh do logo Lactalis) atravessa as telas e muda de posição a cada uma. QA: `?desktop` força o modo apresentação e `&ar=2.2` simula outra proporção.
 
 ```
 index.html              todas as telas (roteiro + material de apoio) e notas da apresentadora
